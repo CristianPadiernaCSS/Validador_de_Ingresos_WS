@@ -18,23 +18,23 @@ public class Function
     /// <param name="input">The event for the Lambda function handler to process.</param>
     /// <param name="context">The ILambdaContext that provides methods for logging and describing the Lambda environment.</param>
     /// <returns></returns>
-    public async Task<string> FunctionHandler(string input, ILambdaContext context)
+    public async Task<ValidatorResponseDto> FunctionHandler(ParametersValidadorDto input, ILambdaContext context)
     {
-        var datos = new ParametersValidadorDto
-        {
-            Autorizacion = "S",
-            IdProducto = "5718",
-            NumeroIdentificacion = "1000001214",
-            SalarioReportado = "1000000",
-            TipoIdentificacion = "1",
-            UsuarioId = "262499",
-        };
+        //var datos = new ParametersValidadorDto
+        //{
+        //    Autorizacion = "S",
+        //    IdProducto = "5718",
+        //    NumeroIdentificacion = "1000001214",
+        //    SalarioReportado = "1000000",
+        //    TipoIdentificacion = "1",
+        //    UsuarioId = "262499",
+        //};
 
         var certificatePassword = Environment.GetEnvironmentVariable("certificatePassword");
         var username = Environment.GetEnvironmentVariable("username");
         var password = Environment.GetEnvironmentVariable("password");
         var serviceUrl = Environment.GetEnvironmentVariable("serviceUrl");
-        string parametrosXml = SoapValidatorRequestBuilder.ParametrosValidadorXml(datos);
+        string parametrosXml = SoapValidatorRequestBuilder.ParametrosValidadorXml(input);
 
 
         // Crear cliente y realizar consulta
@@ -44,7 +44,7 @@ public class Function
         var response = await client.ConsultaValidadorAsync(parametrosXml);
         var dto = ValidatorResponseDto.FromSoapResponse(response);
 
-        return "Finalizado";
+        return dto;
     }
 
     private static X509Certificate2 LoadEmbeddedCertificate(string certificatePassword)
