@@ -1,0 +1,20 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "https://miportafoliouat.transunion.co/ValidadorIEWS/services/ValidadorIEWS?wsdl"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, ValidadorIngresos"
+    ],
+    "references": [
+      "Amazon.Lambda.Core, {Amazon.Lambda.Core, 2.5.0}",
+      "Amazon.Lambda.Serialization.SystemTextJson, {Amazon.Lambda.Serialization.SystemTextJson, 2.4.4}"
+    ],
+    "targetFramework": "net8.0",
+    "typeReuseMode": "All"
+  }
+}
