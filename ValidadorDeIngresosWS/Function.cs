@@ -23,38 +23,8 @@ public class Function
     /// <returns></returns>
     public async Task<APIGatewayProxyResponse> FunctionHandler(APIGatewayProxyRequest request, ILambdaContext context)
     {
-        //var datos = new ParametersValidadorDto
-        //{
-        //    Autorizacion = "S",
-        //    IdProducto = "5718",
-        //    NumeroIdentificacion = "1000001214",
-        //    SalarioReportado = "1000000",
-        //    TipoIdentificacion = "1",
-        //    UsuarioId = "262499",
-        //};
+  
         return await HandlePostAsync(request);
-        //return request.RequestContext.HttpMethod?.ToUpper() switch
-        //{
-        //    "POST" => await HandlePostAsync(request),
-        //    _ => CreateResponse(HttpStatusCode.MethodNotAllowed, new
-        //    {
-        //        error = "Método no permitido."
-        //    })
-        //};
-    }
-
-    private APIGatewayProxyResponse CreateResponse(HttpStatusCode statusCode, object body)
-    {
-        return new APIGatewayProxyResponse
-        {
-            StatusCode = (int)statusCode,
-            Body = JsonSerializer.Serialize(body),
-            Headers = new Dictionary<string, string>
-            {
-                { "Content-Type", "application/json" },
-                { "Access-Control-Allow-Origin", "*" } // Permite CORS público
-            }
-        };
     }
 
     private async Task<APIGatewayProxyResponse> HandlePostAsync(APIGatewayProxyRequest request)
