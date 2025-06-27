@@ -15,6 +15,15 @@ namespace ValidadorDeIngresosWS.Dtos
             if (returnNode == null)
                 throw new Exception("No se encontró consultaValidadorReturn");
 
+            if (string.IsNullOrWhiteSpace(returnNode.Value))
+            {
+                return new ValidatorResponseDto
+                {
+                    Tercero = null,
+                    Consumo = null
+                };
+            }
+
             var rawXml = System.Net.WebUtility.HtmlDecode(returnNode.Value);
             var validadorXml = XDocument.Parse(rawXml);
 
